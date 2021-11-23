@@ -104,13 +104,24 @@
     <script src="script.js"></script>    
     <script>
         var bg = document.querySelector('body');
-        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        var red = Math.floor(Math.random() * (255 - 0 + 1) ) + 0;
+        var green = Math.floor(Math.random() * (255 - 0 + 1) ) + 0;
+        var blue = Math.floor(Math.random() * (255 - 0 + 1) ) + 0;
+        var randomColor = `rgb(${red}, ${green}, ${blue})`;
+        var lum = (0.299 * red + 0.587 * green + 0.114 * blue)/255;
+        if(lum > 0.5){
+            document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'black'));
+        }
+        else{
+            document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'white'));
+        }
+        // var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         bg.style.setProperty('--bg-color', randomColor);
         var front = document.querySelectorAll('.front-face');
-        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         front.forEach(element => element.style.setProperty('--front-color', randomColor));
         var back = document.querySelectorAll('.back-face');
-        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         back.forEach(element => element.style.setProperty('--back-color', randomColor));        
     </script>
     <script>
