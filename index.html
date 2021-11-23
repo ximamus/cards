@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body> 
+    <script>
+        var show = confirm('Показывать ли подсказки карт?');        
+    </script>
+    <div class="info">
+        <h1>Осталось карт: <span id="cards-left">12</span></h1>
+        <h1>Осталось времени: <span id="time-left">30</span></h1>
+        <h1 id="end" style="visibility: hidden;"></h1>
+    </div>    
+    <section class="memory-game">
+        <div class="memory-card" data-framework="1">
+            <img class="front-face" src="img/1.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="1">
+            <img class="front-face" src="img/1.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+
+        <div class="memory-card" data-framework="2">
+            <img class="front-face" src="img/2.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="2">
+            <img class="front-face" src="img/2.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+
+        <div class="memory-card" data-framework="3">
+            <img class="front-face" src="img/3.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="3">
+            <img class="front-face" src="img/3.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+
+        <div class="memory-card" data-framework="4">
+            <img class="front-face" src="img/4.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="4">
+            <img class="front-face" src="img/4.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+
+        <div class="memory-card" data-framework="5">
+            <img class="front-face" src="img/5.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="5">
+            <img class="front-face" src="img/5.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+
+        <div class="memory-card" data-framework="6">
+            <img class="front-face" src="img/6.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+        <div class="memory-card" data-framework="6">
+            <img class="front-face" src="img/6.svg">
+            <img class="back-face" src="img/bg.svg">
+        </div>
+    </section> 
+    
+    <section class="memory-game-left">              
+        <div class="memory-card-left" data-framework="1">
+            <img class="front-face left" src="img/1.svg">            
+        </div>        
+
+        <div class="memory-card-left" data-framework="2">
+            <img class="front-face left" src="img/2.svg">            
+        </div>
+        
+        <div class="memory-card-left" data-framework="3">
+            <img class="front-face left" src="img/3.svg">           
+        </div>
+       
+        <div class="memory-card-left" data-framework="4">
+            <img class="front-face left" src="img/4.svg">            
+        </div>
+       
+        <div class="memory-card-left" data-framework="5">
+            <img class="front-face left" src="img/5.svg">            
+        </div>
+        
+        <div class="memory-card-left" data-framework="6">
+            <img class="front-face left" src="img/6.svg">            
+        </div>            
+    </section>    
+    <script>
+        if(!show){
+            var section = document.querySelector('.memory-game-left');
+            section.remove();            
+        }
+    </script>           
+    <script src="script.js"></script>    
+    <script>
+        var bg = document.querySelector('body');
+        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        bg.style.setProperty('--bg-color', randomColor);
+        var front = document.querySelectorAll('.front-face');
+        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        front.forEach(element => element.style.setProperty('--front-color', randomColor));
+        var back = document.querySelectorAll('.back-face');
+        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        back.forEach(element => element.style.setProperty('--back-color', randomColor));        
+    </script>
+    <script>
+        class Timer{
+            sound = new Audio('gameover.wav');
+            time = 30
+            render(){
+                this.time -= 1;                
+                if(this.time == 0){
+                    this.gameOver();
+                }
+                document.getElementById('time-left').innerHTML = this.time;
+            }
+            start(){                
+                this.timer = setInterval(() => this.render(), 1000);                
+            }
+            stop(){
+                clearInterval(this.timer);
+            }
+            gameOver(){
+                clearInterval(this.timer);
+                this.sound.play();
+                document.querySelectorAll('.memory-card').forEach(card => card.removeEventListener('click', flipCard));
+                document.getElementById('end').style.cssText = 'visibility: visible; color: red';
+                document.getElementById('end').innerHTML = 'Game over!';
+            }
+        }
+        var timer = new Timer();
+        timer.start();
+    </script>    
+</body>
+</html>
