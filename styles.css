@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
+body {
     height: 100vh;
     --bg-color: rgb(255, 255, 255);
     background: var(--bg-color);
     display: flex;
     font-family: 'Roboto', sans-serif;
 }
-.memory-game{
+.memory-game {
     width: 640px;
     height: 640px;
     margin: auto;
@@ -19,7 +19,7 @@ body{
     flex-wrap: wrap;
     perspective: 1000px;
 }
-.memory-card{
+.memory-card {
     width: calc(25% - 10px);
     height: calc(33.333% - 10px);
     margin: 5px;
@@ -29,14 +29,14 @@ body{
     transition: transform .5s;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 }
-.memory-card:active{
+.memory-card:active {
     transform: scale(.97);
     transition: transform .2s;
 }
-.memory-card.flip{
+.memory-card.flip {
     transform: rotateY(180deg);
 }
-.front-face, .back-face{
+.front-face, .back-face {
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -46,12 +46,12 @@ body{
     background: var(--back-color);
     backface-visibility: hidden;
 }
-.front-face{
+.front-face {
     transform: rotateY(180deg);
     --front-color: #fff;
     background: var(--front-color);
 }
-.memory-game-left{
+.memory-game-left {
     width: 480px;
     height: 420px;
     margin: auto;
@@ -60,7 +60,7 @@ body{
     perspective: 1000px;
     border: solid 10px;
 }
-.memory-card-left{
+.memory-card-left {
     width: calc(33.333% - 10px);
     height: calc(50% - 10px);
     margin: 5px;
@@ -70,11 +70,11 @@ body{
     transition: transform .5s;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 }
-.left{
+.left {
     transform: rotateY(0deg);
     --front-color: #fff;
     background: var(--front-color);
 }
-.info{    
-    margin: auto;    
+.info {
+    margin: auto;
 }

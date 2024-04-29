@@ -7,7 +7,7 @@
 </head>
 <body> 
     <script>
-        var show = confirm('Показывать ли подсказки карт?');        
+        var show = confirm('Показывать подсказки карт?');
     </script>
     <div class="info">
         <h1>Осталось карт: <span id="cards-left">12</span></h1>
@@ -23,7 +23,6 @@
             <img class="front-face" src="img/1.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-
         <div class="memory-card" data-framework="2">
             <img class="front-face" src="img/2.svg">
             <img class="back-face" src="img/bg.svg">
@@ -32,7 +31,6 @@
             <img class="front-face" src="img/2.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-
         <div class="memory-card" data-framework="3">
             <img class="front-face" src="img/3.svg">
             <img class="back-face" src="img/bg.svg">
@@ -41,7 +39,6 @@
             <img class="front-face" src="img/3.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-
         <div class="memory-card" data-framework="4">
             <img class="front-face" src="img/4.svg">
             <img class="back-face" src="img/bg.svg">
@@ -50,7 +47,6 @@
             <img class="front-face" src="img/4.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-
         <div class="memory-card" data-framework="5">
             <img class="front-face" src="img/5.svg">
             <img class="back-face" src="img/bg.svg">
@@ -59,7 +55,6 @@
             <img class="front-face" src="img/5.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-
         <div class="memory-card" data-framework="6">
             <img class="front-face" src="img/6.svg">
             <img class="back-face" src="img/bg.svg">
@@ -68,29 +63,23 @@
             <img class="front-face" src="img/6.svg">
             <img class="back-face" src="img/bg.svg">
         </div>
-    </section> 
-    
+    </section>
     <section class="memory-game-left">              
         <div class="memory-card-left" data-framework="1">
             <img class="front-face left" src="img/1.svg">            
-        </div>        
-
+        </div>
         <div class="memory-card-left" data-framework="2">
             <img class="front-face left" src="img/2.svg">            
         </div>
-        
         <div class="memory-card-left" data-framework="3">
             <img class="front-face left" src="img/3.svg">           
         </div>
-       
         <div class="memory-card-left" data-framework="4">
             <img class="front-face left" src="img/4.svg">            
         </div>
-       
         <div class="memory-card-left" data-framework="5">
             <img class="front-face left" src="img/5.svg">            
         </div>
-        
         <div class="memory-card-left" data-framework="6">
             <img class="front-face left" src="img/6.svg">            
         </div>            
@@ -111,34 +100,27 @@
         var lum = (0.299 * red + 0.587 * green + 0.114 * blue)/255;
         if(lum > 0.5){
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'black'));
-            if(show){
-                document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');
-            }            
+            if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');                 
         }
         else{
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'white'));
-            if(show){
-                document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
-            }            
+            if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
         }
-        // var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         bg.style.setProperty('--bg-color', randomColor);
         var front = document.querySelectorAll('.front-face');
         randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         front.forEach(element => element.style.setProperty('--front-color', randomColor));
-        var back = document.querySelectorAll('.back-face');
+        var back = document.querySelectorAll('.back-face');        
         randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         back.forEach(element => element.style.setProperty('--back-color', randomColor));        
     </script>
     <script>
         class Timer{
             sound = new Audio('gameover.wav');
-            time = 30
+            time = 30;
             render(){
                 this.time -= 1;                
-                if(this.time == 0){
-                    this.gameOver();
-                }
+                if(this.time == 0) this.gameOver();
                 document.getElementById('time-left').innerHTML = this.time;
             }
             start(){                

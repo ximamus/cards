@@ -6,12 +6,10 @@ let firstCard, secondCard;
 let cardsLeft = 12;
 let winSound = new Audio('win.wav');
 
-function flipCard(){
+function flipCard() {
     if(lockBoard) return;
     if(this === firstCard) return;
-
     this.classList.add('flip');
-
     if(!hasFlippedCard){
         hasFlippedCard = true;
         firstCard = this;
@@ -21,13 +19,12 @@ function flipCard(){
     checkForMatch();
 }
 
-function checkForMatch(){
+function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
     isMatch ? disableCards() : unflipCards();
 }
 
-function disableCards(){
+function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
     divs = document.querySelectorAll('div.memory-card-left'); 
@@ -47,9 +44,8 @@ function disableCards(){
     resetBoard();
 }
 
-function unflipCards(){
+function unflipCards() {
     lockBoard = true;
-
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
@@ -57,12 +53,12 @@ function unflipCards(){
     }, 1500);
 }
 
-function resetBoard(){
+function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
 }
 
-(function shuffle(){
+(function shuffle() {
     cards.forEach(card => {
         let randomPos = Math.floor(Math.random() * 12);
         card.style.order = randomPos;
