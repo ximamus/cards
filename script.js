@@ -1,16 +1,16 @@
 const cards = document.querySelectorAll('.memory-card');
 
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
-let cardsLeft = 12;
-let winSound = new Audio('win.wav');
+var hasFlippedCard = false;
+var lockBoard = false;
+var firstCard, secondCard;
+var cardsLeft = 12;
+const winSound = new Audio('win.wav');
 
 function flipCard() {
-    if(lockBoard) return;
-    if(this === firstCard) return;
+    if (lockBoard) return;
+    if (this === firstCard) return;
     this.classList.add('flip');
-    if(!hasFlippedCard){
+    if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
         return;
@@ -20,24 +20,23 @@ function flipCard() {
 }
 
 function checkForMatch() {
-    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-    isMatch ? disableCards() : unflipCards();
+    firstCard.dataset.framework === secondCard.dataset.framework ? disableCards() : unflipCards();
 }
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-    divs = document.querySelectorAll('div.memory-card-left'); 
-    divs.forEach(element => {
-        if(element.dataset.framework == firstCard.dataset.framework){
+    document.querySelectorAll('.memory-card-left').forEach(element => {
+        if (element.dataset.framework === firstCard.dataset.framework) {
             element.parentElement.removeChild(element);
         }
     });
     cardsLeft -= 2;
-    if(cardsLeft == 0){
+    if (cardsLeft === 0) {
         timer.stop();
-        document.getElementById('end').style.cssText = 'visibility: visible; color: blue';
-        document.getElementById('end').innerHTML = 'Win!';
+        const end = document.getElementById('end');
+        end.style.cssText = 'visibility: visible; color: blue';
+        end.innerHTML = 'Win!';
         winSound.play();
     }
     document.getElementById('cards-left').innerHTML = cardsLeft; 
@@ -60,8 +59,7 @@ function resetBoard() {
 
 (function shuffle() {
     cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 12);
-        card.style.order = randomPos;
+        card.style.order = Math.floor(Math.random() * 12);
     });
 })();
 

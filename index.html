@@ -7,7 +7,7 @@
 </head>
 <body> 
     <script>
-        var show = confirm('Показывать подсказки карт?');
+        const show = confirm('Показывать подсказки карт?');
     </script>
     <div class="info">
         <h1>Осталось карт: <span id="cards-left">12</span></h1>
@@ -85,9 +85,8 @@
         </div>            
     </section>    
     <script>
-        if(!show){
-            var section = document.querySelector('.memory-game-left');
-            section.remove();            
+        if (!show) {
+            document.querySelector('.memory-game-left').remove();            
         }
     </script>           
     <script src="script.js"></script>    
@@ -106,50 +105,44 @@
             }
             return `rgb(${generated[0]}, ${generated[1]}, ${generated[2]})`;
         }
-        var bg = document.querySelector('body');
+        const bg = document.querySelector('body');
         const bodyRgb = generateRGB();
-        var lum = (0.299 * bodyRgb[0] + 0.587 * bodyRgb[1] + 0.114 * bodyRgb[2])/255;
-        if(lum > 0.5){
+        const lum = (0.299 * bodyRgb[0] + 0.587 * bodyRgb[1] + 0.114 * bodyRgb[2])/255;
+        if (lum > 0.5) {
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'black'));
             if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');                 
         }
-        else{
+        else {
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'white'));
             if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
         }
         var randomColor = generateColor(bodyRgb);
         bg.style.setProperty('--bg-color', randomColor);
-        var front = document.querySelectorAll('.front-face');
-        // var randomColor2 = "#"+((1<<24)*Math.random()|0).toString(16);
-        // while (randomColor === randomColor2) {
-        //     randomColor2 = "#"+((1<<24)*Math.random()|0).toString(16);
-        // }
+        const front = document.querySelectorAll('.front-face');
+        // randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         randomColor = generateColor();
         front.forEach(element => element.style.setProperty('--front-color', randomColor));
-        var back = document.querySelectorAll('.back-face');
-        // var randomColor3 = "#"+((1<<24)*Math.random()|0).toString(16);
-        // while (randomColor === randomColor3 || randomColor2 === randomColor3) {
-        //     randomColor3 = "#"+((1<<24)*Math.random()|0).toString(16);
-        // }
+        const back = document.querySelectorAll('.back-face');
+        // randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         randomColor = generateColor()
         back.forEach(element => element.style.setProperty('--back-color', randomColor));
     </script>
     <script>
-        class Timer{
+        class Timer {
             sound = new Audio('gameover.wav');
             time = 30;
-            render(){
-                this.time -= 1;                
-                if(this.time == 0) this.gameOver();
+            render() {
+                this.time--;
+                if (this.time === 0) this.gameOver();
                 document.getElementById('time-left').innerHTML = this.time;
             }
-            start(){                
-                this.timer = setInterval(() => this.render(), 1000);                
+            start() {
+                this.timer = setInterval(() => this.render(), 1000);
             }
-            stop(){
+            stop() {
                 clearInterval(this.timer);
             }
-            gameOver(){
+            gameOver() {
                 clearInterval(this.timer);
                 this.sound.play();
                 document.querySelectorAll('.memory-card').forEach(card => card.removeEventListener('click', flipCard));
@@ -157,7 +150,7 @@
                 document.getElementById('end').innerHTML = 'Game over!';
             }
         }
-        var timer = new Timer();
+        const timer = new Timer();
         timer.start();
     </script>    
 </body>
