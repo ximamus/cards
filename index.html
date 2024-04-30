@@ -101,7 +101,6 @@
             }
             return `rgb(${generated[0]}, ${generated[1]}, ${generated[2]})`;
         }
-        const bg = document.querySelector('body');
         const bodyRgb = generateRGB();
         const lum = (0.299 * bodyRgb[0] + 0.587 * bodyRgb[1] + 0.114 * bodyRgb[2])/255;
         if (lum > 0.5) {
@@ -113,15 +112,13 @@
             if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
         }
         var randomColor = generateColor(bodyRgb);
-        bg.style.setProperty('--bg-color', randomColor);
-        const front = document.querySelectorAll('.front-face');
+        document.querySelector('body').style.setProperty('--bg-color', randomColor);
         // randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         randomColor = generateColor();
-        front.forEach(element => element.style.setProperty('--front-color', randomColor));
-        const back = document.querySelectorAll('.back-face');
+        document.querySelectorAll('.front-face').forEach(element => element.style.setProperty('--front-color', randomColor));
         // randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
         randomColor = generateColor()
-        back.forEach(element => element.style.setProperty('--back-color', randomColor));
+        document.querySelectorAll('.back-face').forEach(element => element.style.setProperty('--back-color', randomColor));
     </script>
     <script>
         class Timer {
