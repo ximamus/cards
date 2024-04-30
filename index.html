@@ -92,10 +92,7 @@
     <script src="script.js"></script>    
     <script>
         function generateRGB() {
-            const red = Math.floor(Math.random() * 256);
-            const green = Math.floor(Math.random() * 256);
-            const blue = Math.floor(Math.random() * 256);
-            return [red, green, blue];
+            return [Math.floor(Math.random() * 256), Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)];
         }
         function generateColor(generated) {
             if (!generated) {
