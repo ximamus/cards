@@ -92,12 +92,23 @@
     </script>           
     <script src="script.js"></script>    
     <script>
+        function generateRGB() {
+            const red = Math.floor(Math.random() * 256);
+            const green = Math.floor(Math.random() * 256);
+            const blue = Math.floor(Math.random() * 256);
+            return [red, green, blue];
+        }
+        function generateColor(generated) {
+            var rgb;
+            if (!generated) {
+                rgb = generateRGB();
+                return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            }
+            return `rgb(${generated[0]}, ${generated[1]}, ${generated[2]})`;
+        }
         var bg = document.querySelector('body');
-        var red = Math.floor(Math.random() * 256);
-        var green = Math.floor(Math.random() * 256);
-        var blue = Math.floor(Math.random() * 256);
-        var randomColor = `rgb(${red}, ${green}, ${blue})`;
-        var lum = (0.299 * red + 0.587 * green + 0.114 * blue)/255;
+        const bodyRgb = generateRGB();
+        var lum = (0.299 * bodyRgb[0] + 0.587 * bodyRgb[1] + 0.114 * bodyRgb[2])/255;
         if(lum > 0.5){
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'black'));
             if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');                 
@@ -106,13 +117,22 @@
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'white'));
             if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
         }
+        var randomColor = generateColor(bodyRgb);
         bg.style.setProperty('--bg-color', randomColor);
         var front = document.querySelectorAll('.front-face');
-        randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        // var randomColor2 = "#"+((1<<24)*Math.random()|0).toString(16);
+        // while (randomColor === randomColor2) {
+        //     randomColor2 = "#"+((1<<24)*Math.random()|0).toString(16);
+        // }
+        randomColor = generateColor();
         front.forEach(element => element.style.setProperty('--front-color', randomColor));
-        var back = document.querySelectorAll('.back-face');        
-        randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
-        back.forEach(element => element.style.setProperty('--back-color', randomColor));        
+        var back = document.querySelectorAll('.back-face');
+        // var randomColor3 = "#"+((1<<24)*Math.random()|0).toString(16);
+        // while (randomColor === randomColor3 || randomColor2 === randomColor3) {
+        //     randomColor3 = "#"+((1<<24)*Math.random()|0).toString(16);
+        // }
+        randomColor = generateColor()
+        back.forEach(element => element.style.setProperty('--back-color', randomColor));
     </script>
     <script>
         class Timer{
