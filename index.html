@@ -98,9 +98,8 @@
             return [red, green, blue];
         }
         function generateColor(generated) {
-            var rgb;
             if (!generated) {
-                rgb = generateRGB();
+                const rgb = generateRGB();
                 return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
             }
             return `rgb(${generated[0]}, ${generated[1]}, ${generated[2]})`;
