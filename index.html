@@ -105,11 +105,11 @@
         const lum = (0.299 * bodyRgb[0] + 0.587 * bodyRgb[1] + 0.114 * bodyRgb[2])/255;
         if (lum > 0.5) {
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'black'));
-            if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');                 
+            if (show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px black');                 
         }
         else {
             document.querySelectorAll('.info h1').forEach(element => element.style.setProperty('color', 'white'));
-            if(show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
+            if (show) document.querySelector('.memory-game-left').style.setProperty('border', 'solid 10px white');
         }
         var randomColor = generateColor(bodyRgb);
         document.querySelector('body').style.setProperty('--bg-color', randomColor);
@@ -139,8 +139,9 @@
                 clearInterval(this.timer);
                 this.sound.play();
                 document.querySelectorAll('.memory-card').forEach(card => card.removeEventListener('click', flipCard));
-                document.getElementById('end').style.cssText = 'visibility: visible; color: red';
-                document.getElementById('end').innerHTML = 'Game over!';
+                const end = document.getElementById('end');
+                end.style.cssText = 'visibility: visible; color: red';
+                end.innerHTML = 'Game over!';
             }
         }
         const timer = new Timer();
