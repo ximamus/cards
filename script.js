@@ -60,7 +60,6 @@ function resetBoard() {
 (function shuffle() {
     cards.forEach(card => {
         card.style.order = Math.floor(Math.random() * 12);
+        card.addEventListener('click', flipCard);
     });
 })();
-
-cards.forEach(card => card.addEventListener('click', flipCard));
